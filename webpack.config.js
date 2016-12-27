@@ -10,4 +10,12 @@ module.exports = {
             scripts: __dirname + '/lib'
         }
     },
+    module:{
+        loaders: [
+            { test: /\.(glsl|vs|fs)$/, loader: 'shader' },
+        ]
+    },
+    glsl: {
+        chunkPath: __dirname + "/public/scripts/shaders/chunks"
+    }
 };

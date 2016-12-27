@@ -1,19 +1,14 @@
 /**
  * Created by damiendg on 2016-12-25.
  */
-import gl from "scripts/initialize.gl.context.js";
+import {gl} from "scripts/initializeGlContext.js";
+import vertexShaderCode from "scripts/shaders/chunks/basicVertex.glsl"
+
 
 function createVertexShader(){
-    var vertexCode = `
-    attribute vec3 coordinates;
-
-    void main(void) {
-        gl_Position = vec4(coordinates, 1.0);
-    }
-    
-    `;
+    let vertexCode = vertexShaderCode;
 // Create a vertex shader object
-    var vertexShader = gl.createShader(gl.VERTEX_SHADER);
+    let vertexShader = gl.createShader(gl.VERTEX_SHADER);
 
 // Attach vertex shader source code
     gl.shaderSource(vertexShader, vertexCode);
@@ -25,4 +20,4 @@ function createVertexShader(){
 }
 
 
-export {createVertexShader}
+export {createVertexShader};
