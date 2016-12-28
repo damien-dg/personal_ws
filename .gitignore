@@ -1,5 +1,4 @@
 .idea/
 /node_modules
 /lib
-/scripts/build
-/public/build/bundle.js
+/build
