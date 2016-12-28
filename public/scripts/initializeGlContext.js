@@ -14,8 +14,7 @@ function initializeGLContext() {
         return;
     }
 
-    // Set clear color to black, fully opaque
-    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    gl.clearColor(0.5, 0.5, 0.5, 0.9);
     // Enable depth testing
     gl.enable(gl.DEPTH_TEST);
     // Near things obscure far things

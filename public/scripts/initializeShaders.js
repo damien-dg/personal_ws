@@ -5,10 +5,11 @@ import {gl, initializeGLContext} from "scripts/initializeGlContext.js";
 import {createFragmentShader} from "scripts/shaders/fragment.js"
 import {createVertexShader} from "scripts/shaders/vertex.js"
 
+let shaderProgram;
 
 function initShaders(){
 
-    let shaderProgram = gl.createProgram();
+    shaderProgram = gl.createProgram();
 
     let vertexShader = createVertexShader();
     let fragmentShader = createFragmentShader();
@@ -25,4 +26,4 @@ function initShaders(){
     gl.useProgram(shaderProgram);
 }
 
-export {initShaders};
+export {initShaders, shaderProgram};
