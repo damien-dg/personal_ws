@@ -17,10 +17,17 @@ window.onload = function(){
         -0.25,0.25,0.0,
     ];
 
+    let vertices2 = [
+        0.99,0.99,0.0,
+        0.1,0.7,0.0,
+        -0.3,0.9,0.0
+    ];
+
 
     let mainGame = new Renderer();
     mainGame.addSceneObjectToRenderArray(new SceneObject(vertices));
+    mainGame.addSceneObjectToRenderArray(new SceneObject(vertices2));
     mainGame.createVertexBuffer();
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
 
 };

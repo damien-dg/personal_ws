@@ -68,10 +68,13 @@
 
 	    var vertices = [-0.5, 0.5, 0.0, 0.0, 0.5, 0.0, -0.25, 0.25, 0.0];
 
+	    var vertices2 = [0.99, 0.99, 0.0, 0.1, 0.7, 0.0, -0.3, 0.9, 0.0];
+
 	    var mainGame = new _Renderer2.default();
 	    mainGame.addSceneObjectToRenderArray(new _SceneObject2.default(vertices));
+	    mainGame.addSceneObjectToRenderArray(new _SceneObject2.default(vertices2));
 	    mainGame.createVertexBuffer();
-	    _initializeGlContext.gl.drawArrays(_initializeGlContext.gl.TRIANGLES, 0, 3);
+	    _initializeGlContext.gl.drawArrays(_initializeGlContext.gl.TRIANGLES, 0, 6);
 	}; /**
 	    * Created by damiendg on 2016-12-25.
 	    */
@@ -2526,7 +2529,7 @@
 
 	        //Bind appropriate array buffer to it
 	        _initializeGlContext.gl.bindBuffer(_initializeGlContext.gl.ARRAY_BUFFER, vertex_buffer);
-
+	        console.log(this.vertexArray);
 	        // Pass the vertex data to the buffer
 	        _initializeGlContext.gl.bufferData(_initializeGlContext.gl.ARRAY_BUFFER, new Float32Array(this.vertexArray.join().split(",")), _initializeGlContext.gl.STATIC_DRAW);
 

@@ -25,7 +25,7 @@ Renderer.prototype = {
 
         //Bind appropriate array buffer to it
         gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
-
+        console.log(this.vertexArray);
         // Pass the vertex data to the buffer
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertexArray.join().split(",")), gl.STATIC_DRAW);
 
