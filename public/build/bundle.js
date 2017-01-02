@@ -56,9 +56,9 @@
 
 	var _SceneObject2 = _interopRequireDefault(_SceneObject);
 
-	var _Renderer = __webpack_require__(17);
+	var _GameLoop = __webpack_require__(17);
 
-	var _Renderer2 = _interopRequireDefault(_Renderer);
+	var _GameLoop2 = _interopRequireDefault(_GameLoop);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -70,11 +70,11 @@
 
 	    var vertices2 = [0.99, 0.99, 0.0, 0.1, 0.7, 0.0, -0.3, 0.9, 0.0];
 
-	    var mainGame = new _Renderer2.default();
-	    mainGame.addSceneObjectToRenderArray(new _SceneObject2.default(vertices));
-	    mainGame.addSceneObjectToRenderArray(new _SceneObject2.default(vertices2));
-	    mainGame.createVertexBuffer();
-	    _initializeGlContext.gl.drawArrays(_initializeGlContext.gl.TRIANGLES, 0, 6);
+	    var mainGame = new _GameLoop2.default();
+	    mainGame.renderer.addSceneObjectToRenderArray(new _SceneObject2.default(vertices));
+	    mainGame.renderer.addSceneObjectToRenderArray(new _SceneObject2.default(vertices2));
+	    mainGame.renderer.createVertexBuffer();
+	    mainGame.runGame();
 	}; /**
 	    * Created by damiendg on 2016-12-25.
 	    */
@@ -2503,6 +2503,61 @@
 	    value: true
 	});
 
+	var _Renderer = __webpack_require__(18);
+
+	var _Renderer2 = _interopRequireDefault(_Renderer);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function GameLoop() {
+	    this.renderer = new _Renderer2.default();
+	    this.timeAtLastFrame = new Date().getTime();
+	    this.idealTimePerFrame = 1000 / 30;
+	    this.leftover = 0.0;
+	    this.frames = 0;
+	} /**
+	   * Created by damiendg on 2017-01-02.
+	   */
+
+
+	GameLoop.prototype = {
+	    constructor: GameLoop,
+	    runGame: function runGame() {
+	        var _this = this;
+
+	        setInterval(function () {
+	            return _this.tick();
+	        }, 1000 / 30);
+	    },
+	    tick: function tick() {
+	        var timeAtThisFrame = new Date().getTime();
+	        var timeSinceLastDoLogic = timeAtThisFrame - this.timeAtLastFrame + this.leftover;
+	        var catchUpFrameCount = Math.floor(timeSinceLastDoLogic / this.idealTimePerFrame);
+
+	        for (var i = 0; i < catchUpFrameCount; i++) {
+	            //controller.doLogic();
+	            this.frames++;
+	        }
+
+	        this.renderer.renderScene();
+
+	        this.leftover = timeSinceLastDoLogic - catchUpFrameCount * this.idealTimePerFrame;
+	        this.timeAtLastFrame = timeAtThisFrame;
+	    }
+	};
+
+	exports.default = GameLoop;
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
 	var _initializeGlContext = __webpack_require__(1);
 
 	var _initializeShaders = __webpack_require__(2);
@@ -2513,30 +2568,34 @@
 	function Renderer() {
 	    this.renderArray = [];
 	    this.vertexArray = [];
+	    this.vertexArraySize = 0;
 	}
 
 	Renderer.prototype = {
 	    constructor: Renderer,
-	    draw: function draw() {},
+	    renderScene: function renderScene() {
+	        _initializeGlContext.gl.drawArrays(_initializeGlContext.gl.TRIANGLES, 0, this.vertexArraySize);
+	    },
 	    addSceneObjectToRenderArray: function addSceneObjectToRenderArray(sceneObjectToAdd) {
 	        this.renderArray.push(sceneObjectToAdd);
 	        this.vertexArray.push(sceneObjectToAdd.modelMatrix);
+	        this.vertexArraySize += sceneObjectToAdd.modelMatrix.length / 3;
+	        console.log(this.vertexArraySize);
 	    },
 
 	    createVertexBuffer: function createVertexBuffer() {
 	        // Create an empty buffer object to store the vertex buffer
-	        var vertex_buffer = _initializeGlContext.gl.createBuffer();
+	        this.main_vertex_buffer = _initializeGlContext.gl.createBuffer();
 
 	        //Bind appropriate array buffer to it
-	        _initializeGlContext.gl.bindBuffer(_initializeGlContext.gl.ARRAY_BUFFER, vertex_buffer);
+	        _initializeGlContext.gl.bindBuffer(_initializeGlContext.gl.ARRAY_BUFFER, this.main_vertex_buffer);
 	        console.log(this.vertexArray);
 	        // Pass the vertex data to the buffer
 	        _initializeGlContext.gl.bufferData(_initializeGlContext.gl.ARRAY_BUFFER, new Float32Array(this.vertexArray.join().split(",")), _initializeGlContext.gl.STATIC_DRAW);
 
 	        // Unbind the buffer
-	        _initializeGlContext.gl.bindBuffer(_initializeGlContext.gl.ARRAY_BUFFER, null);
 
-	        _initializeGlContext.gl.bindBuffer(_initializeGlContext.gl.ARRAY_BUFFER, vertex_buffer);
+	        _initializeGlContext.gl.bindBuffer(_initializeGlContext.gl.ARRAY_BUFFER, this.main_vertex_buffer);
 
 	        // Get the attribute location
 	        var coord = _initializeGlContext.gl.getAttribLocation(_initializeShaders.shaderProgram, "coordinates");

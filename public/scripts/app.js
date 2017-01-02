@@ -5,7 +5,7 @@ import {gl, initializeGLContext} from "scripts/initializeGlContext.js";
 import {initShaders, shaderProgram} from 'scripts/initializeShaders.js';
 import {$M, $V} from 'sylvester';
 import SceneObject from 'scripts/SceneObject.js';
-import Renderer from 'scripts/Renderer.js';
+import GameLoop from 'scripts/GameLoop.js';
 
 window.onload = function(){
     initializeGLContext();
@@ -24,10 +24,10 @@ window.onload = function(){
     ];
 
 
-    let mainGame = new Renderer();
-    mainGame.addSceneObjectToRenderArray(new SceneObject(vertices));
-    mainGame.addSceneObjectToRenderArray(new SceneObject(vertices2));
-    mainGame.createVertexBuffer();
-    gl.drawArrays(gl.TRIANGLES, 0, 6);
+    let mainGame = new GameLoop();
+    mainGame.renderer.addSceneObjectToRenderArray(new SceneObject(vertices));
+    mainGame.renderer.addSceneObjectToRenderArray(new SceneObject(vertices2));
+    mainGame.renderer.createVertexBuffer();
+    mainGame.runGame();
 
 };
