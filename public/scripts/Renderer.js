@@ -32,8 +32,7 @@ Renderer.prototype = {
         // Pass the vertex data to the buffer
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertexArray.join().split(",")), gl.STATIC_DRAW);
 
-        // Unbind the buffer
-
+        // rebind the buffer
         gl.bindBuffer(gl.ARRAY_BUFFER, this.main_vertex_buffer);
 
         // Get the attribute location
