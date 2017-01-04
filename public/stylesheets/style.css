@@ -1,10 +1,21 @@
+html{
+  height:100%;
+}
 body {
-  padding: 50px;
+  height:100%;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: white;
   background-color:black;
+  margin:0px;
+  padding:0px;
 }
-
+h1{
+  position:absolute;
+}
 a {
   color: #00B7FF;
+}
+
+button{
+  position:fixed;
 }

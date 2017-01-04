@@ -6,6 +6,8 @@ let gl; // A global variable for the WebGL context
 
 function initializeGLContext() {
     let canvas = document.getElementById("glCanvas");
+    canvas.width = document.body.clientWidth; //document.width is obsolete
+    canvas.height = document.body.clientHeight -1;
     // Initialize the GL context
     gl = initWebGL(canvas);
 
@@ -21,8 +23,11 @@ function initializeGLContext() {
     gl.depthFunc(gl.LEQUAL);
     // Clear the color as well as the depth buffer.
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+
     //set WebGL viewPort
-    gl.viewport(0,0,canvas.width,canvas.height);
+    gl.viewport(0,0, canvas.width, canvas.height);
+
 }
 
 function initWebGL(canvas) {

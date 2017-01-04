@@ -6,6 +6,10 @@ import {initShaders, shaderProgram} from 'scripts/initializeShaders.js';
 import {$M, $V} from 'sylvester';
 import SceneObject from 'scripts/SceneObject.js';
 import GameLoop from 'scripts/GameLoop.js';
+//TEMP FIX FOR DEPENDENCY ERROR
+import 'reflect-metadata';
+import 'zone.js'
+import 'scripts/MainApp/main.js';
 
 window.onload = function(){
     initializeGLContext();
@@ -30,4 +34,15 @@ window.onload = function(){
     mainGame.renderer.createVertexBuffer();
     mainGame.runGame();
 
+    window.createRandomTriangle = function(){
+        let vertices2 = [
+            0.5,-0.5,0.0,
+            0.0,-0.5,0.0,
+            0.25,-0.25,0.0,
+        ];
+        mainGame.renderer.addSceneObjectToRenderArray(new SceneObject(vertices2));
+    };
+
 };
+
+
