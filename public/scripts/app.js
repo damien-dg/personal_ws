@@ -5,7 +5,7 @@ import {gl, initializeGLContext} from "scripts/initializeGlContext.js";
 import {initShaders, shaderProgram} from 'scripts/initializeShaders.js';
 import {$M, $V} from 'sylvester';
 import SceneObject from 'scripts/SceneObject.js';
-import GameLoop from 'scripts/GameLoop.js';
+import {mainGame, initGame} from "scripts/initializeGame.js"
 //TEMP FIX FOR DEPENDENCY ERROR
 import 'reflect-metadata';
 import 'zone.js'
@@ -28,7 +28,7 @@ window.onload = function(){
     ];
 
 
-    let mainGame = new GameLoop();
+    initGame();
     mainGame.renderer.addSceneObjectToRenderArray(new SceneObject(vertices));
     mainGame.renderer.addSceneObjectToRenderArray(new SceneObject(vertices2));
     mainGame.renderer.createVertexBuffer();
@@ -45,4 +45,4 @@ window.onload = function(){
 
 };
 
-
+export default mainGame

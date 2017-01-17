@@ -9,6 +9,9 @@ body {
   margin:0px;
   padding:0px;
 }
+triangle-builder{
+  position:absolute;
+}
 h1{
   position:absolute;
 }

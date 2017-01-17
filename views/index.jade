@@ -3,9 +3,9 @@ extends layout
 block content
   h1= title
 
+  triangle-builder
   canvas(id='glCanvas', width='640', height='480')
     Your browser doesn't appear to support the
     code &lt;canvas&gt; element.
 
-  triangle-builder Loading...
   button(onclick="createRandomTriangle()") Add random triangle

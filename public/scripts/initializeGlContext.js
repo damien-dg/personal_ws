@@ -2,10 +2,10 @@
  * Created by damiendg on 2016-12-25.
  */
 let gl; // A global variable for the WebGL context
-
+let canvas;
 
 function initializeGLContext() {
-    let canvas = document.getElementById("glCanvas");
+    canvas = document.getElementById("glCanvas");
     canvas.width = document.body.clientWidth; //document.width is obsolete
     canvas.height = document.body.clientHeight -1;
     // Initialize the GL context
@@ -43,4 +43,4 @@ function initWebGL(canvas) {
 }
 
 
-export {gl, initializeGLContext};
+export {gl, canvas, initializeGLContext};
