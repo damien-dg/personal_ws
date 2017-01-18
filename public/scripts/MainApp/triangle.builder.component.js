@@ -24,16 +24,17 @@ let AppComponent =
             this.currentYPos;
         },
         onMouseUp: function(){
-            console.log("MOUSING DOWN");
             this.mouseDown = false;
         },
         placeVertex : function(event){
-                this.currentXPos = event.clientX;
-                this.currentYPos = event.clientY;
-                let actualX = event.clientX/canvas.width;
-                let actualY = event.clientY/canvas.height;
-                let actualZ = 0.0;
-                mainGame.renderer.addSceneObjectToRenderArray(new SceneObject([actualX, actualY, actualZ]));
+            this.currentXPos = event.clientX;
+            this.currentYPos = event.clientY;
+            let positiveXMax = canvas.width/2;
+            let positiveYMax = canvas.height/2;
+            let actualX = ((event.clientX - positiveXMax)/positiveXMax);
+            let actualY = -((event.clientY - positiveYMax)/positiveYMax);
+            let actualZ = 0.0;
+            mainGame.renderer.addSceneObjectToRenderArray(new SceneObject([actualX, actualY, actualZ]));
 
         }
     });

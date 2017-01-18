@@ -17,5 +17,8 @@ module.exports = {
     },
     glsl: {
         chunkPath: __dirname + "/public/scripts/shaders/chunks"
+    },
+    node: {
+      fs: "empty"
     }
 };

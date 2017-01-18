@@ -6,8 +6,8 @@ let canvas;
 
 function initializeGLContext() {
     canvas = document.getElementById("glCanvas");
-    canvas.width = document.body.clientWidth; //document.width is obsolete
-    canvas.height = document.body.clientHeight -1;
+    canvas.width = window.innerWidth; //document.width is obsolete
+    canvas.height = window.innerHeight;
     // Initialize the GL context
     gl = initWebGL(canvas);
 
