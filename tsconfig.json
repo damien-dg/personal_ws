@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "files": [
+    "public/scripts/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
